@@ -12,6 +12,10 @@ public class SkeletonGame extends Game implements Scene {
 	public static int score; 
 	Text scoreText;
 	public static Score sc; 
+	public static Scene game; 
+	public static Scene pause;
+	public static Scene menu; 
+	public Scene vict; 
 	
 	
 	public static void main(String[] args) {
@@ -37,9 +41,6 @@ public class SkeletonGame extends Game implements Scene {
 		sc = new Score("res/Zero.jpg"); 
 
 	}
-	public class Player extends GameObject {
-		
-	}
 	public static class Score extends GameObject {
 		private Texture texture = null; 
 		public Score(String skin) {
@@ -54,7 +55,10 @@ public class SkeletonGame extends Game implements Scene {
 		public void draw() {
 			texture.draw(this);
 		}
-		public void update(int delta) { 
+		public void update(int delta) {
+			if(Game.ui.keyPressed(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT)) { 
+				score++; 
+			}
 			if (score == 0) {
 				sc.setTexture("res/Zero.jpg");
 			}
@@ -89,7 +93,7 @@ public class SkeletonGame extends Game implements Scene {
 				sc.setTexture("res/ten.jpg");
 			}
 		}
-	} 
+	}
 	
 	
 	public Scene drawFrame(int delta) {
@@ -98,6 +102,14 @@ public class SkeletonGame extends Game implements Scene {
 
 		sc.draw();
 		sc.update(delta);
+		if(score == 10) {
+			Victory vict = new Victory(); 
+			return vict; 
+		}
+		if (Game.ui.keyPressed(org.lwjgl.glfw.GLFW.GLFW_KEY_P)) {
+			Pause pause = new Pause(this, score); 
+			return pause; 
+		}
 		
 		
 		return this; 
