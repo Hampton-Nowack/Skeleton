@@ -23,12 +23,12 @@ public class Victory extends Game implements Scene {
 	Target t;
 	Text time; 
 	double timeOut;
-	Text victory = new Text(150,200,80,80, "Victory"); 
+	Text victory = new Text(145,50,80,80, "Victory"); 
 	SkeletonGame game;
 	Sound yaaa;
 	
 	public Victory(SkeletonGame game) {
-		t = new Target(150, 250, "Return To Main Menu");
+		t = new Target(50, 200, "Return To Main Menu");
 		this.game = game;
 		yaaa = new Sound("res/YEAAAYEAAA.wav"); 
 		
@@ -41,7 +41,7 @@ public class Victory extends Game implements Scene {
 		menu.select(0);
 		this.score = score;
 		this.timeOut = timeOut;
-		time = new Text(150,300,50,50, String.valueOf(timeOut)); 
+		time = new Text(50,300,50,50, "Time: " + String.valueOf(timeOut) + " seconds"); 
 		yaaa.play(); 
 		yaaa.setLoop(true);
 	}	
